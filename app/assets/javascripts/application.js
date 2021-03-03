@@ -68,7 +68,7 @@ function tick(){
     timer=setInterval("countdown()",1);
 }
 
-const ctx = new AudioContext();
+var ctx = new AudioContext();
 var oscillator;
 var isPlaying = false;
 
