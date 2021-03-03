@@ -1,0 +1,56 @@
+  <div class="center jumbotron">
+      <div class="text-center">
+        <% if logged_in?  %>
+          <h1 id="timer"><%= current_user.work %>:00</h1>
+        <% else %>
+          <h1 id="timer">25:00</h1>
+        <% end %>
+        </h1>
+        <%= link_to 'START', start_path, class: 'btn btn-lg btn-primary', id: "start_button",remote: true %>
+        <%= link_to 'STOP', stop_path, class: 'btn btn-lg btn-primary', id: "stop_button",remote: true %>
+      </div>
+  </div>
+  
+<% if logged_in? %>
+  <ul class="nav nav-tabs nav-justified mb-3">
+    
+    <li class="nav-item"><%= link_to 'task & memo',task_and_memo_path,id:"task_memo_tab",class:"nav-link active",remote: true %></li>
+    <li class="nav-item"><%= link_to 'post',posts_path,id:"post_tab",class:"nav-link",remote: true %></li>
+  </ul>
+  <div class="row" id="contents-box">
+    <%= render 'toppages/task_memo' %>
+  </div>
+  
+  <script>
+    work=<%= current_user.work %>
+    short_break=<%= current_user.short_break %>
+    long_break=<%= current_user.long_break %>
+    is_work=<%= current_user.is_work %>
+    work_count=<%= current_user.today_work_count %>
+    
+    window.onbeforeunload=set_lasttime;
+    window.onload=function(){
+      restore_lasttime();
+    };
+  </script>
+<% else %>
+  <h1>What's Pomodoro?</h1>
+  <p style="white-space: pre-wrap;">
+    ポモドーロタイマーは、生産性を飛躍的に向上させるツールです。
+    仕事をずっと続けてしまって、疲れてしまって逆に効率が落ちてしまった経験はありませんか?
+    ポモドーロタイマーは、そんなあなたのためにあります。
+    仕組みは基本的に、シンプルです。
+    仕事や勉強の時間と休憩の時間を管理してくれます。
+    仕事や勉強の時間は、デフォルトでは25分になっています。
+    休憩の時間は2種類あります。短い休憩と長い休憩があります。
+    こちらは、デフォルトでは、短い休憩が5分、長い休憩が15分となっています。
+    タイマーは、0になった状態で、ストップを押すことで、自動的に次の時間がセットされます。
+    仕事の時間、短い休憩の時間を3セット終えたら、次は、仕事の時間、長い休憩の時間がセットされます。
+    
+    時間を決めて、きっちり働き、休む時は、きっちり休む。その効果をぜひ一度お試しください。
+    サインアップしていただけると、タイマーのデフォルトの時間設定を変えて頂けるようになります。
+    また、タスクを管理する機能、学びのを残すメモ機能、学びを他のユーザと
+    共有していただけるつぶやきの機能がご利用いただけます。
+    
+  </p>
+<% end %>
