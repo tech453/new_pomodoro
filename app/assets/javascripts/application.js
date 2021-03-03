@@ -65,7 +65,7 @@ function countdown(){
 function tick(){
     start_button.disabled=true;
     is_counting=true;
-    timer=setInterval("countdown()",1);
+    timer=setInterval("countdown()",1000);
 }
 
 var ctx = new AudioContext();
